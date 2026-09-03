@@ -1,5 +1,5 @@
 # test_kitchen.py (อัปเดตใหม่ทั้งหมด)
-from kitchen import Quantity
+from kitchen import Quantity, Converter
 
 def grams(amount):  
     return Quantity(amount, "g")  
@@ -26,3 +26,8 @@ def test_equality():
 
 def test_grams_are_not_ounces():  
     assert grams(1) != ounces(1)
+
+def test_simple_addition():
+    total = grams(200).plus(grams(300))
+    converter = Converter()
+    assert converter.reduce(total, "g") == grams(500)
